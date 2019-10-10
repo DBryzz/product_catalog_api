@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.gotraining.productcatalogapi.dao.ProductRepository;
+import com.gotraining.productcatalogapi.entity.Category;
 import com.gotraining.productcatalogapi.entity.Product;
 
 @Service
@@ -27,4 +28,11 @@ public class ProductService {
 	  public  void  deleteProductById(int id){
 		  productRepository.deleteById(id);
     }
+	  
+	  public Product createProduct(Product newproduct) {
+	        return productRepository.save(newproduct);
+	    }
+	  public Product updateProduct(Product newproduct) {
+	        return productRepository.save(newproduct);
+	    }
 }

@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-
 import com.gotraining.productcatalogapi.entity.Category;
 import com.gotraining.productcatalogapi.service.CategoryService;
 
