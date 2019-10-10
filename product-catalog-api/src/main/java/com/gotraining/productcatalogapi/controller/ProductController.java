@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import com.gotraining.productcatalogapi.entity.Category;
 import com.gotraining.productcatalogapi.entity.Product;
+import com.gotraining.productcatalogapi.exception.ProductNotFoundException;
 import com.gotraining.productcatalogapi.service.CategoryService;
 import com.gotraining.productcatalogapi.service.ProductService;
 
@@ -39,7 +40,10 @@ public class ProductController {
 	@GetMapping(path="/products/{productid}")
 	public  ResponseEntity<Object> getOneProduct(@PathVariable("productid") int id)
 	{
-		return new ResponseEntity<>(productService.getProductById(id),HttpStatus.OK);
+		Optional<Product> product=productService.getProductById(id);
+		if(!product.isPresent())
+			throw new ProductNotFoundException("product-id"+id+" not found");
+		return new ResponseEntity<>(product,HttpStatus.OK);
 	}
 	
 	@DeleteMapping(path="/products/{productid}")

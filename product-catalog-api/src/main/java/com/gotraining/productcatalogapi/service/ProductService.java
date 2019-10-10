@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.gotraining.productcatalogapi.dao.ProductRepository;
-import com.gotraining.productcatalogapi.entity.Category;
 import com.gotraining.productcatalogapi.entity.Product;
 
 @Service

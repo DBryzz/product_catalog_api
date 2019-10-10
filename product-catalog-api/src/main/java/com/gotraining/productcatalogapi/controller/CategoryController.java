@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.gotraining.productcatalogapi.entity.Category;
+import com.gotraining.productcatalogapi.exception.CategoryNotFoundException;
 import com.gotraining.productcatalogapi.service.CategoryService;
 
 
@@ -40,6 +41,9 @@ public class CategoryController {
 	@GetMapping(path="/category/{categoryid}")
 	public  ResponseEntity<Object> getCategoryById(@PathVariable int categoryid)
 	{
+		Optional<Category> category =categoryService.getCategoryById(categoryid);
+		if(!category.isPresent())
+			throw new CategoryNotFoundException("category-id"+categoryid+" not found");
 		return new ResponseEntity<>(categoryService.getCategoryById(categoryid),HttpStatus.OK);
 	}
 	
@@ -64,9 +68,7 @@ public class CategoryController {
 		Category categoryupdate=category.get();
 		categoryupdate.setCategoryname(categoryname.getCategoryname());
 	    return new ResponseEntity<>(categoryService.updateCategory(categoryupdate),HttpStatus.NO_CONTENT);
-
-		
-		
+	
 	} 
 	
 	
