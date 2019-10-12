@@ -19,7 +19,6 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.gotraining.productcatalogapi.entity.Category;
 import com.gotraining.productcatalogapi.exceptions.ResourceNotFoundException;
-import com.gotraining.productcatalogapi.repository.CategoryRepo;
 import com.gotraining.productcatalogapi.repository.CategoryRepository;
 
 @Service
