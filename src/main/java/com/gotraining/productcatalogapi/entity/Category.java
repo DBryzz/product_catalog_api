@@ -10,6 +10,8 @@ import javax.persistence.Table;
 
 import org.springframework.stereotype.Component;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Component
 @Entity
 @Table
@@ -20,6 +22,7 @@ public class Category {
 	private int catId;
 	private String catName;
 	
+	@JsonIgnore
 	@OneToMany(mappedBy="category")
 	private List<Product> products;
 	
