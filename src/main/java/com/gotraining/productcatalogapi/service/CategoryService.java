@@ -50,8 +50,13 @@ public class CategoryService {
 		return resource;
 	}
 	
-	public void removeCategory(int id) {
+	public ResponseEntity<Object> removeCategory(int id) {
+		Optional<Category> delCategory = categoryRepo.findById(id);
+		if(!delCategory.isPresent()) {
+			throw new ResourceNotFoundException("id - " +id);
+		}
 		categoryRepo.deleteById(id);
+		return new ResponseEntity<>(delCategory, HttpStatus.NO_CONTENT);
 	}
 	
 	public ResponseEntity<Object> postCategory(Category category) { //@Valid
@@ -68,6 +73,9 @@ public class CategoryService {
 	
 	public ResponseEntity<Object> editCategory(int id, Category categoryName) {
 		Optional<Category> category = categoryRepo.findById(id);
+		if(!category.isPresent()) {
+			throw new ResourceNotFoundException("id - " +id);
+		}
 		Category categoryUpdate = category.get();
 		categoryUpdate.setCatName(categoryName.getCatName());
 		return new ResponseEntity<>(categoryRepo.save(categoryUpdate), HttpStatus.NO_CONTENT);

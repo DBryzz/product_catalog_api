@@ -2,16 +2,23 @@ package com.gotraining.productcatalogapi.entity;
 
 
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
+import org.springframework.stereotype.Component;
+
+import com.gotraining.productcatalogapi.entity.Category;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+@Component
 @Entity
+@Table
 public class Product {
 	
 @Id	
@@ -21,6 +28,9 @@ private int productid;
 private String productname;
 private long quantity;
 private long price;
+
+@ManyToOne(fetch=FetchType.LAZY)
+private Category category;
 
 
 
@@ -74,8 +84,7 @@ public void setPrice(long price) {
 }
 
 
-@ManyToOne(fetch=FetchType.LAZY)
-private Category category;
+
 
 
 public Category getCategory() {
@@ -97,7 +106,10 @@ public Product setCategory(Category category) {
 	return this;
 }
 
-
+public void putCategory(Category category) {
+	this.category = category;
+	//return this;
+}
 
 @Override
 public String toString() {
